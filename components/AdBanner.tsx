@@ -21,8 +21,8 @@ export default function AdBanner({ type, className }: AdBannerProps) {
       style={{
         width: size.width,
         height: size.height,
-        background: 'linear-gradient(135deg, rgba(0,212,255,0.04), rgba(179,71,255,0.04))',
-        border: '1px dashed rgba(0,212,255,0.2)',
+        background: 'var(--ad-bg)',
+        border: '1px dashed var(--ad-border)',
         borderRadius: '8px',
         display: 'flex',
         flexDirection: 'column',
@@ -40,7 +40,8 @@ export default function AdBanner({ type, className }: AdBannerProps) {
         top: '6px',
         left: '10px',
         fontSize: '9px',
-        color: 'rgba(136,153,170,0.4)',
+        color: 'var(--text-muted)',
+        opacity: 0.5,
         textTransform: 'uppercase',
         letterSpacing: '1px',
         fontFamily: "'Inter', sans-serif",
@@ -49,12 +50,14 @@ export default function AdBanner({ type, className }: AdBannerProps) {
       {/* Placeholder text */}
       <span style={{
         fontSize: '11px',
-        color: 'rgba(136,153,170,0.3)',
+        color: 'var(--text-secondary)',
+        opacity: 0.4,
         fontFamily: "'Inter', sans-serif",
       }}>{size.label}</span>
       <span style={{
         fontSize: '10px',
-        color: 'rgba(136,153,170,0.2)',
+        color: 'var(--text-secondary)',
+        opacity: 0.25,
         fontFamily: "'Inter', sans-serif",
       }}>Replace with AdSense / Ad Network Code</span>
 
@@ -63,7 +66,7 @@ export default function AdBanner({ type, className }: AdBannerProps) {
         <div key={pos} style={{
           position: 'absolute',
           width: '4px', height: '4px',
-          background: 'rgba(0,212,255,0.2)',
+          background: 'var(--ad-dot)',
           borderRadius: '50%',
           ...(pos === 'topLeft' ? { top: '8px', left: '8px' } :
               pos === 'topRight' ? { top: '8px', right: '8px' } :

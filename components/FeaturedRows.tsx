@@ -16,13 +16,13 @@ function GameRow({ title, emoji, games, id }: GameRowProps) {
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px', padding: '0 24px' }}>
         <div style={{
           width: '4px', height: '24px',
-          background: 'linear-gradient(to bottom, #00d4ff, #b347ff)',
+          background: 'linear-gradient(to bottom, var(--neon-blue), var(--neon-purple))',
           borderRadius: '2px',
         }} />
         <h2 style={{
           fontFamily: "'Orbitron', monospace",
           fontSize: '20px', fontWeight: 700,
-          color: '#f0f4ff', letterSpacing: '1px',
+          color: 'var(--text-primary)', letterSpacing: '1px',
         }}>{emoji} {title}</h2>
       </div>
 
@@ -30,7 +30,7 @@ function GameRow({ title, emoji, games, id }: GameRowProps) {
         display: 'flex', gap: '16px',
         overflowX: 'auto', padding: '4px 24px 12px',
         scrollbarWidth: 'thin',
-        scrollbarColor: '#00d4ff transparent',
+        scrollbarColor: 'var(--neon-blue) transparent',
       }}>
         {games.map(game => (
           <div key={game.id} style={{ flexShrink: 0, width: '220px' }}>

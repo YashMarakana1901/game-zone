@@ -11,14 +11,14 @@ export default function HeroBanner() {
       position: 'relative',
       padding: '48px 24px 40px',
       overflow: 'hidden',
-      background: 'linear-gradient(180deg, rgba(0,212,255,0.05) 0%, transparent 100%)',
+      background: 'var(--hero-bg)',
     }}>
       {/* Background grid */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 0,
         backgroundImage: `
-          linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px)
+          linear-gradient(var(--grid-line) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)
         `,
         backgroundSize: '40px 40px',
       }} />
@@ -27,13 +27,13 @@ export default function HeroBanner() {
       <div style={{
         position: 'absolute', top: '-100px', left: '20%',
         width: '400px', height: '400px',
-        background: 'radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%)',
+        background: `radial-gradient(circle, var(--glow-blue) 0%, transparent 70%)`,
         zIndex: 0, pointerEvents: 'none',
       }} />
       <div style={{
         position: 'absolute', top: '-80px', right: '15%',
         width: '350px', height: '350px',
-        background: 'radial-gradient(circle, rgba(179,71,255,0.08) 0%, transparent 70%)',
+        background: `radial-gradient(circle, var(--glow-purple) 0%, transparent 70%)`,
         zIndex: 0, pointerEvents: 'none',
       }} />
 
@@ -41,15 +41,15 @@ export default function HeroBanner() {
         <div style={{ textAlign: 'center', marginBottom: '48px' }}>
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: '8px',
-            background: 'rgba(0,212,255,0.1)',
-            border: '1px solid rgba(0,212,255,0.3)',
+            background: 'var(--pill-bg)',
+            border: '1px solid var(--pill-border)',
             borderRadius: '20px',
             padding: '6px 16px',
             marginBottom: '20px',
           }}>
             <span style={{ fontSize: '12px' }}>⚡</span>
             <span style={{
-              color: '#00d4ff',
+              color: 'var(--neon-blue)',
               fontFamily: "'Rajdhani', sans-serif",
               fontSize: '13px',
               fontWeight: 600,
@@ -67,20 +67,20 @@ export default function HeroBanner() {
             letterSpacing: '-1px',
           }}>
             <span style={{
-              background: 'linear-gradient(135deg, #f0f4ff 30%, #00d4ff)',
+              background: 'linear-gradient(135deg, var(--text-primary) 30%, var(--neon-blue))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}>PLAY FREE</span>
             <br />
             <span style={{
-              background: 'linear-gradient(135deg, #b347ff, #ff2d78)',
+              background: 'linear-gradient(135deg, var(--neon-purple), var(--neon-pink))',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
             }}>ONLINE GAMES</span>
           </h1>
 
           <p style={{
-            color: '#8899aa',
+            color: 'var(--text-secondary)',
             fontSize: '18px',
             maxWidth: '520px',
             margin: '0 auto 32px',
@@ -93,26 +93,26 @@ export default function HeroBanner() {
           <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="#games" style={{ textDecoration: 'none' }}>
               <button style={{
-                background: 'linear-gradient(135deg, #00d4ff, #b347ff)',
+                background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
                 color: 'white', border: 'none',
                 padding: '14px 36px', borderRadius: '8px',
                 fontFamily: "'Orbitron', monospace",
                 fontWeight: 700, fontSize: '14px',
                 letterSpacing: '1px', cursor: 'pointer',
                 textTransform: 'uppercase',
-                boxShadow: '0 0 20px rgba(0,212,255,0.3)',
+                boxShadow: '0 0 20px color-mix(in srgb, var(--neon-blue) 30%, transparent)',
                 transition: 'all 0.2s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 30px rgba(0,212,255,0.6)')}
-              onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 20px rgba(0,212,255,0.3)')}>
+              onMouseEnter={e => (e.currentTarget.style.boxShadow = '0 0 30px color-mix(in srgb, var(--neon-blue) 60%, transparent)')}
+              onMouseLeave={e => (e.currentTarget.style.boxShadow = '0 0 20px color-mix(in srgb, var(--neon-blue) 30%, transparent)')}>
                 🎮 Play Now
               </button>
             </Link>
             <Link href="#categories" style={{ textDecoration: 'none' }}>
               <button style={{
                 background: 'transparent',
-                color: '#f0f4ff', 
-                border: '1px solid rgba(0,212,255,0.3)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--search-border)',
                 padding: '14px 36px', borderRadius: '8px',
                 fontFamily: "'Orbitron', monospace",
                 fontWeight: 600, fontSize: '13px',
@@ -120,12 +120,12 @@ export default function HeroBanner() {
                 transition: 'all 0.2s',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.borderColor = '#00d4ff';
-                e.currentTarget.style.color = '#00d4ff';
+                e.currentTarget.style.borderColor = 'var(--neon-blue)';
+                e.currentTarget.style.color = 'var(--neon-blue)';
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.borderColor = 'rgba(0,212,255,0.3)';
-                e.currentTarget.style.color = '#f0f4ff';
+                e.currentTarget.style.borderColor = 'var(--search-border)';
+                e.currentTarget.style.color = 'var(--text-primary)';
               }}>
                 Browse Categories
               </button>
@@ -148,11 +148,11 @@ export default function HeroBanner() {
               <div style={{
                 fontFamily: "'Orbitron', monospace",
                 fontSize: '24px', fontWeight: 900,
-                background: 'linear-gradient(135deg, #00d4ff, #b347ff)',
+                background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
               }}>{stat.value}</div>
-              <div style={{ color: '#8899aa', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <div style={{ color: 'var(--text-secondary)', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 {stat.label}
               </div>
             </div>

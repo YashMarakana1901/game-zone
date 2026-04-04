@@ -17,7 +17,6 @@ export default function CookieBanner() {
   const accept = () => {
     try { localStorage.setItem('gz_cookie_consent', 'all'); } catch {}
     setVisible(false);
-    // Here you'd initialise analytics / ad scripts
   };
 
   const reject = () => {
@@ -32,12 +31,12 @@ export default function CookieBanner() {
       position: 'fixed', bottom: 0, left: 0, right: 0,
       zIndex: 999,
       padding: '16px 24px',
-      background: 'rgba(13,17,23,0.98)',
+      background: 'var(--cookie-bg)',
       backdropFilter: 'blur(20px)',
-      borderTop: '1px solid rgba(0,212,255,0.2)',
+      borderTop: '1px solid var(--cookie-border)',
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       flexWrap: 'wrap', gap: '16px',
-      boxShadow: '0 -4px 30px rgba(0,0,0,0.5)',
+      boxShadow: '0 -4px 30px rgba(0,0,0,0.15)',
       animation: 'slideUp 0.4s ease',
     }}>
       <style>{`
@@ -50,12 +49,12 @@ export default function CookieBanner() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flex: 1 }}>
         <span style={{ fontSize: '22px' }}>🍪</span>
         <p style={{
-          color: '#8899aa', fontSize: '13px',
+          color: 'var(--text-secondary)', fontSize: '13px',
           fontFamily: "'Inter', sans-serif", lineHeight: 1.5,
           maxWidth: '600px',
         }}>
           We use cookies to personalise ads and analyse traffic.{' '}
-          <a href="/privacy" style={{ color: '#00d4ff', textDecoration: 'underline' }}>
+          <a href="/privacy" style={{ color: 'var(--neon-blue)', textDecoration: 'underline' }}>
             Privacy Policy
           </a>
         </p>
@@ -66,22 +65,22 @@ export default function CookieBanner() {
           onClick={reject}
           style={{
             background: 'transparent',
-            border: '1px solid rgba(0,212,255,0.2)',
-            color: '#8899aa', padding: '8px 18px',
+            border: '1px solid var(--cookie-border)',
+            color: 'var(--text-secondary)', padding: '8px 18px',
             borderRadius: '6px', cursor: 'pointer',
             fontFamily: "'Rajdhani', sans-serif",
             fontSize: '13px', fontWeight: 600,
             transition: 'all 0.2s',
           }}
-          onMouseEnter={e => { e.currentTarget.style.borderColor = 'rgba(0,212,255,0.5)'; e.currentTarget.style.color = '#f0f4ff'; }}
-          onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(0,212,255,0.2)'; e.currentTarget.style.color = '#8899aa'; }}
+          onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--neon-blue)'; e.currentTarget.style.color = 'var(--text-primary)'; }}
+          onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--cookie-border)'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
         >
           Essential Only
         </button>
         <button
           onClick={accept}
           style={{
-            background: 'linear-gradient(135deg, #00d4ff, #b347ff)',
+            background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
             border: 'none', color: 'white',
             padding: '8px 22px', borderRadius: '6px',
             cursor: 'pointer',
@@ -90,7 +89,7 @@ export default function CookieBanner() {
             letterSpacing: '0.5px',
             transition: 'box-shadow 0.2s',
           }}
-          onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 16px rgba(0,212,255,0.4)'; }}
+          onMouseEnter={e => { e.currentTarget.style.boxShadow = '0 0 16px color-mix(in srgb, var(--neon-blue) 40%, transparent)'; }}
           onMouseLeave={e => { e.currentTarget.style.boxShadow = 'none'; }}
         >
           Accept All

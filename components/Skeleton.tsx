@@ -3,27 +3,27 @@
 export function GameCardSkeleton() {
   return (
     <div style={{
-      background: '#111827',
+      background: 'var(--skeleton-base)',
       borderRadius: '12px',
       overflow: 'hidden',
-      border: '1px solid rgba(0,212,255,0.08)',
+      border: '1px solid var(--card-border)',
     }}>
       <div style={{
         height: '140px',
-        background: 'linear-gradient(90deg, #111827 25%, #1a2236 50%, #111827 75%)',
+        background: `linear-gradient(90deg, var(--skeleton-base) 25%, var(--skeleton-shine) 50%, var(--skeleton-base) 75%)`,
         backgroundSize: '200% 100%',
         animation: 'shimmer 1.5s infinite',
       }} />
       <div style={{ padding: '12px' }}>
         <div style={{
           height: '14px', width: '70%', borderRadius: '4px', marginBottom: '8px',
-          background: 'linear-gradient(90deg, #1a2236 25%, #243048 50%, #1a2236 75%)',
+          background: `linear-gradient(90deg, var(--skeleton-shine) 25%, var(--skeleton-shine2) 50%, var(--skeleton-shine) 75%)`,
           backgroundSize: '200% 100%',
           animation: 'shimmer 1.5s infinite',
         }} />
         <div style={{
           height: '11px', width: '45%', borderRadius: '4px',
-          background: 'linear-gradient(90deg, #1a2236 25%, #243048 50%, #1a2236 75%)',
+          background: `linear-gradient(90deg, var(--skeleton-shine) 25%, var(--skeleton-shine2) 50%, var(--skeleton-shine) 75%)`,
           backgroundSize: '200% 100%',
           animation: 'shimmer 1.5s infinite',
         }} />

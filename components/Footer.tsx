@@ -6,9 +6,10 @@ export default function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer style={{
-      borderTop: '1px solid rgba(0,212,255,0.1)',
+      borderTop: '1px solid var(--footer-border)',
       padding: '48px 24px 32px',
-      background: '#0d1117',
+      background: 'var(--footer-bg)',
+      transition: 'background 0.3s ease',
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '40px', marginBottom: '40px' }}>
@@ -18,24 +19,27 @@ export default function Footer() {
               <div style={{
                 fontFamily: "'Orbitron', monospace",
                 fontWeight: 900, fontSize: '22px',
-                background: 'linear-gradient(135deg, #00d4ff, #b347ff)',
+                background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 marginBottom: '12px', letterSpacing: '2px', display: 'inline-block',
               }}>🎮 GAMEZONE</div>
             </Link>
-            <p style={{ color: '#8899aa', fontSize: '14px', fontFamily: "'Inter', sans-serif", lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '14px', fontFamily: "'Inter', sans-serif", lineHeight: 1.6 }}>
               Your #1 destination for free online browser games. No downloads, no sign-up.
             </p>
             <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
               {['Twitter', 'Discord', 'YouTube'].map(s => (
                 <div key={s} style={{
                   width: '34px', height: '34px',
-                  background: 'rgba(0,212,255,0.08)',
-                  border: '1px solid rgba(0,212,255,0.2)',
+                  background: 'var(--social-bg)',
+                  border: '1px solid var(--social-border)',
                   borderRadius: '8px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
                   cursor: 'pointer', fontSize: '14px',
-                }} title={s}>
+                  transition: 'border-color 0.2s',
+                }} title={s}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--neon-blue)')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--social-border)')}>
                   {s === 'Twitter' ? '𝕏' : s === 'Discord' ? '💬' : '▶'}
                 </div>
               ))}
@@ -46,19 +50,19 @@ export default function Footer() {
           <div>
             <h4 style={{
               fontFamily: "'Orbitron', monospace", fontSize: '12px',
-              color: '#00d4ff', letterSpacing: '2px', marginBottom: '16px',
+              color: 'var(--neon-blue)', letterSpacing: '2px', marginBottom: '16px',
               textTransform: 'uppercase',
             }}>Categories</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {['Action', 'Puzzle', 'Racing', 'Sports', 'Adventure', 'Arcade'].map(cat => (
                 <Link key={cat} href={`/category/${cat}`} style={{ textDecoration: 'none' }}>
                   <span style={{
-                    color: '#8899aa', fontSize: '14px',
+                    color: 'var(--text-secondary)', fontSize: '14px',
                     fontFamily: "'Rajdhani', sans-serif", fontWeight: 500,
                     transition: 'color 0.2s', cursor: 'pointer',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#00d4ff')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#8899aa')}>
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-blue)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
                     {cat}
                   </span>
                 </Link>
@@ -70,7 +74,7 @@ export default function Footer() {
           <div>
             <h4 style={{
               fontFamily: "'Orbitron', monospace", fontSize: '12px',
-              color: '#b347ff', letterSpacing: '2px', marginBottom: '16px',
+              color: 'var(--neon-purple)', letterSpacing: '2px', marginBottom: '16px',
               textTransform: 'uppercase',
             }}>Quick Links</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -83,12 +87,12 @@ export default function Footer() {
               ].map(link => (
                 <Link key={link.label} href={link.href} style={{ textDecoration: 'none' }}>
                   <span style={{
-                    color: '#8899aa', fontSize: '14px',
+                    color: 'var(--text-secondary)', fontSize: '14px',
                     fontFamily: "'Rajdhani', sans-serif", fontWeight: 500,
                     transition: 'color 0.2s', cursor: 'pointer',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = '#b347ff')}
-                  onMouseLeave={e => (e.currentTarget.style.color = '#8899aa')}>
+                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-purple)')}
+                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
                     {link.label}
                   </span>
                 </Link>
@@ -100,10 +104,10 @@ export default function Footer() {
           <div>
             <h4 style={{
               fontFamily: "'Orbitron', monospace", fontSize: '12px',
-              color: '#ff6b00', letterSpacing: '2px', marginBottom: '16px',
+              color: 'var(--neon-orange)', letterSpacing: '2px', marginBottom: '16px',
               textTransform: 'uppercase',
             }}>Advertise</h4>
-            <p style={{ color: '#8899aa', fontSize: '13px', fontFamily: "'Inter', sans-serif", lineHeight: 1.6, marginBottom: '16px' }}>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '13px', fontFamily: "'Inter', sans-serif", lineHeight: 1.6, marginBottom: '16px' }}>
               Reach millions of gamers with your ads. Multiple ad formats available.
             </p>
             <a href="mailto:ads@gamezone.com" style={{ textDecoration: 'none' }}>
@@ -123,22 +127,22 @@ export default function Footer() {
         </div>
 
         <div style={{
-          borderTop: '1px solid rgba(0,212,255,0.08)',
+          borderTop: '1px solid var(--footer-border)',
           paddingTop: '24px',
           display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '12px',
           alignItems: 'center',
         }}>
-          <p style={{ color: '#4a5568', fontSize: '13px', fontFamily: "'Inter', sans-serif" }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '13px', fontFamily: "'Inter', sans-serif" }}>
             © {year} GameZone. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: '20px' }}>
             {['Privacy Policy', 'Terms of Service', 'DMCA'].map(item => (
               <a key={item} href="#" style={{
-                color: '#4a5568', textDecoration: 'none', fontSize: '12px',
+                color: 'var(--text-muted)', textDecoration: 'none', fontSize: '12px',
                 fontFamily: "'Inter', sans-serif", transition: 'color 0.2s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = '#8899aa')}
-              onMouseLeave={e => (e.currentTarget.style.color = '#4a5568')}>
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
                 {item}
               </a>
             ))}

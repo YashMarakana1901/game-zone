@@ -16,10 +16,10 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
     <Link href={game.url} style={{ textDecoration: 'none' }}>
       <div
         style={{
-          background: '#111827',
+          background: 'var(--bg-card)',
           borderRadius: '12px',
           overflow: 'hidden',
-          border: '1px solid rgba(0,212,255,0.1)',
+          border: '1px solid var(--card-border)',
           cursor: 'pointer',
           transition: 'transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease',
           position: 'relative',
@@ -27,14 +27,14 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
         onMouseEnter={e => {
           const el = e.currentTarget as HTMLDivElement;
           el.style.transform = 'translateY(-6px) scale(1.02)';
-          el.style.boxShadow = '0 16px 40px rgba(0,0,0,0.5), 0 0 24px rgba(0,212,255,0.2)';
-          el.style.borderColor = 'rgba(0,212,255,0.4)';
+          el.style.boxShadow = '0 16px 40px rgba(0,0,0,0.2), 0 0 24px color-mix(in srgb, var(--neon-blue) 20%, transparent)';
+          el.style.borderColor = 'var(--card-border-hover)';
         }}
         onMouseLeave={e => {
           const el = e.currentTarget as HTMLDivElement;
           el.style.transform = '';
           el.style.boxShadow = '';
-          el.style.borderColor = 'rgba(0,212,255,0.1)';
+          el.style.borderColor = 'var(--card-border)';
         }}
       >
         {/* Thumbnail */}
@@ -46,7 +46,6 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
             hsl(${parseInt(game.id) * 40 + 60}, 70%, 15%))`,
           overflow: 'hidden',
         }}>
-          {/* Game thumbnail via img tag with fallback */}
           <div style={{
             width: '100%', height: '100%',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -66,11 +65,11 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
           className="play-overlay">
             <div style={{
               width: '52px', height: '52px',
-              background: 'linear-gradient(135deg, #00d4ff, #b347ff)',
+              background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
               borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               fontSize: '20px',
-              boxShadow: '0 0 20px rgba(0,212,255,0.6)',
+              boxShadow: '0 0 20px color-mix(in srgb, var(--neon-blue) 60%, transparent)',
             }}>▶</div>
           </div>
 
@@ -100,12 +99,12 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
           {/* Category tag */}
           <div style={{ position: 'absolute', bottom: '8px', right: '8px' }}>
             <span style={{
-              background: 'rgba(0,0,0,0.7)',
+              background: 'var(--badge-bg)',
               backdropFilter: 'blur(8px)',
-              color: '#00d4ff', fontSize: '10px', fontWeight: 600,
+              color: 'var(--neon-blue)', fontSize: '10px', fontWeight: 600,
               padding: '3px 8px', borderRadius: '4px',
               fontFamily: "'Rajdhani', sans-serif", letterSpacing: '0.5px',
-              border: '1px solid rgba(0,212,255,0.3)',
+              border: '1px solid var(--card-border)',
             }}>{game.category}</span>
           </div>
         </div>
@@ -116,14 +115,14 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
             fontFamily: "'Orbitron', monospace",
             fontSize: isLarge ? '15px' : '13px',
             fontWeight: 700,
-            color: '#f0f4ff',
+            color: 'var(--text-primary)',
             marginBottom: '6px',
             letterSpacing: '0.5px',
           }}>{game.title}</h3>
 
           {isLarge && (
             <p style={{
-              color: '#8899aa',
+              color: 'var(--text-secondary)',
               fontSize: '12px',
               marginBottom: '10px',
               fontFamily: "'Inter', sans-serif",
@@ -134,9 +133,9 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
               <span style={{ color: '#ffd700', fontSize: '12px' }}>★</span>
-              <span style={{ color: '#f0f4ff', fontSize: '12px', fontWeight: 600 }}>{game.rating}</span>
+              <span style={{ color: 'var(--text-primary)', fontSize: '12px', fontWeight: 600 }}>{game.rating}</span>
             </div>
-            <span style={{ color: '#8899aa', fontSize: '11px', fontFamily: "'Inter', sans-serif" }}>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '11px', fontFamily: "'Inter', sans-serif" }}>
               {game.plays} plays
             </span>
           </div>

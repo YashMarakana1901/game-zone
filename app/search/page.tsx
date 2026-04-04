@@ -31,19 +31,19 @@ function SearchContent() {
           <h1 style={{
             fontFamily: "'Orbitron', monospace",
             fontSize: '28px', fontWeight: 900,
-            background: 'linear-gradient(135deg, #00d4ff, #b347ff)',
+            background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
             marginBottom: '20px', letterSpacing: '1px',
           }}>SEARCH GAMES</h1>
 
           <div style={{
             display: 'flex', alignItems: 'center', gap: '12px',
-            background: 'rgba(255,255,255,0.04)',
-            border: '1px solid rgba(0,212,255,0.3)',
+            background: 'var(--search-bg)',
+            border: '1px solid var(--search-border)',
             borderRadius: '12px',
             padding: '14px 20px',
             maxWidth: '600px',
-            boxShadow: '0 0 20px rgba(0,212,255,0.1)',
+            boxShadow: '0 0 20px color-mix(in srgb, var(--neon-blue) 10%, transparent)',
           }}>
             <span style={{ fontSize: '18px' }}>🔍</span>
             <input
@@ -54,7 +54,7 @@ function SearchContent() {
               onChange={e => setQuery(e.target.value)}
               style={{
                 background: 'none', border: 'none', outline: 'none',
-                color: '#f0f4ff', fontFamily: "'Rajdhani', sans-serif",
+                color: 'var(--text-primary)', fontFamily: "'Rajdhani', sans-serif",
                 fontSize: '16px', width: '100%',
               }}
             />
@@ -63,7 +63,7 @@ function SearchContent() {
                 onClick={() => setQuery('')}
                 style={{
                   background: 'none', border: 'none',
-                  color: '#8899aa', cursor: 'pointer', fontSize: '16px',
+                  color: 'var(--text-secondary)', cursor: 'pointer', fontSize: '16px',
                 }}>✕</button>
             )}
           </div>
@@ -71,16 +71,16 @@ function SearchContent() {
 
         {query && (
           <div style={{ marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <span style={{ color: '#8899aa', fontFamily: "'Inter', sans-serif", fontSize: '14px' }}>
+            <span style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '14px' }}>
               Found
             </span>
             <span style={{
-              background: 'rgba(0,212,255,0.1)', border: '1px solid rgba(0,212,255,0.2)',
-              color: '#00d4ff', padding: '3px 12px', borderRadius: '20px',
+              background: 'var(--count-bg)', border: '1px solid var(--count-border)',
+              color: 'var(--neon-blue)', padding: '3px 12px', borderRadius: '20px',
               fontFamily: "'Orbitron', monospace", fontSize: '13px', fontWeight: 700,
             }}>{results.length}</span>
-            <span style={{ color: '#8899aa', fontFamily: "'Inter', sans-serif", fontSize: '14px' }}>
-              games for &quot;<strong style={{ color: '#f0f4ff' }}>{query}</strong>&quot;
+            <span style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '14px' }}>
+              games for &quot;<strong style={{ color: 'var(--text-primary)' }}>{query}</strong>&quot;
             </span>
           </div>
         )}
@@ -97,10 +97,10 @@ function SearchContent() {
           <div style={{ textAlign: 'center', padding: '80px 24px' }}>
             <div style={{ fontSize: '64px', marginBottom: '16px' }}>🕹️</div>
             <h2 style={{
-              fontFamily: "'Orbitron', monospace", color: '#8899aa',
+              fontFamily: "'Orbitron', monospace", color: 'var(--text-secondary)',
               fontSize: '18px', marginBottom: '12px',
             }}>No games found</h2>
-            <p style={{ color: '#4a5568', fontFamily: "'Inter', sans-serif" }}>
+            <p style={{ color: 'var(--text-muted)', fontFamily: "'Inter', sans-serif" }}>
               Try searching for &quot;puzzle&quot;, &quot;racing&quot;, or &quot;action&quot;
             </p>
           </div>

@@ -22,25 +22,25 @@ export default function FavoritesPage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '8px' }}>
             <div style={{
               width: '4px', height: '28px',
-              background: 'linear-gradient(to bottom, #ff2d78, #b347ff)',
+              background: 'linear-gradient(to bottom, var(--neon-pink), var(--neon-purple))',
               borderRadius: '2px',
             }} />
             <h1 style={{
               fontFamily: "'Orbitron', monospace",
               fontSize: '26px', fontWeight: 900,
-              background: 'linear-gradient(135deg, #ff2d78, #b347ff)',
+              background: 'linear-gradient(135deg, var(--neon-pink), var(--neon-purple))',
               WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
               letterSpacing: '1px',
             }}>❤️ MY FAVORITES</h1>
             <span style={{
               background: 'rgba(255,45,120,0.1)',
               border: '1px solid rgba(255,45,120,0.3)',
-              color: '#ff2d78', fontSize: '12px',
+              color: 'var(--neon-pink)', fontSize: '12px',
               padding: '3px 12px', borderRadius: '20px',
               fontFamily: "'Orbitron', monospace", fontWeight: 700,
             }}>{favGames.length}</span>
           </div>
-          <p style={{ color: '#8899aa', fontFamily: "'Inter', sans-serif", fontSize: '14px', marginLeft: '20px' }}>
+          <p style={{ color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '14px', marginLeft: '20px' }}>
             Games you&apos;ve hearted — saved in your browser
           </p>
         </div>
@@ -63,14 +63,14 @@ export default function FavoritesPage() {
             <div style={{ fontSize: '72px', marginBottom: '20px' }}>🤍</div>
             <h2 style={{
               fontFamily: "'Orbitron', monospace",
-              color: '#8899aa', fontSize: '18px', marginBottom: '12px',
+              color: 'var(--text-secondary)', fontSize: '18px', marginBottom: '12px',
             }}>No favorites yet</h2>
-            <p style={{ color: '#4a5568', fontFamily: "'Inter', sans-serif", marginBottom: '28px' }}>
+            <p style={{ color: 'var(--text-muted)', fontFamily: "'Inter', sans-serif", marginBottom: '28px' }}>
               Click the heart icon on any game to save it here
             </p>
             <Link href="/" style={{ textDecoration: 'none' }}>
               <button style={{
-                background: 'linear-gradient(135deg, #ff2d78, #b347ff)',
+                background: 'linear-gradient(135deg, var(--neon-pink), var(--neon-purple))',
                 color: 'white', border: 'none',
                 padding: '12px 28px', borderRadius: '8px',
                 fontFamily: "'Orbitron', monospace",

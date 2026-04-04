@@ -17,18 +17,18 @@ export default function GamesGrid() {
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
         <div style={{
           width: '4px', height: '24px',
-          background: 'linear-gradient(to bottom, #00d4ff, #b347ff)',
+          background: 'linear-gradient(to bottom, var(--neon-blue), var(--neon-purple))',
           borderRadius: '2px',
         }} />
         <h2 style={{
           fontFamily: "'Orbitron', monospace",
           fontSize: '20px', fontWeight: 700,
-          color: '#f0f4ff', letterSpacing: '1px',
+          color: 'var(--text-primary)', letterSpacing: '1px',
         }}>ALL GAMES</h2>
         <span style={{
-          background: 'rgba(0,212,255,0.1)',
-          border: '1px solid rgba(0,212,255,0.2)',
-          color: '#00d4ff', fontSize: '12px',
+          background: 'var(--count-bg)',
+          border: '1px solid var(--count-border)',
+          color: 'var(--neon-blue)', fontSize: '12px',
           padding: '3px 10px', borderRadius: '20px',
           fontFamily: "'Rajdhani', sans-serif",
           fontWeight: 600,
@@ -54,26 +54,26 @@ export default function GamesGrid() {
               letterSpacing: '0.5px',
               border: '1px solid',
               ...(activeCategory === cat ? {
-                background: 'linear-gradient(135deg, #00d4ff, #b347ff)',
+                background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
                 borderColor: 'transparent',
                 color: 'white',
-                boxShadow: '0 0 16px rgba(0,212,255,0.3)',
+                boxShadow: '0 0 16px color-mix(in srgb, var(--neon-blue) 30%, transparent)',
               } : {
                 background: 'transparent',
-                borderColor: 'rgba(0,212,255,0.2)',
-                color: '#8899aa',
+                borderColor: 'var(--filter-inactive-border)',
+                color: 'var(--filter-inactive-color)',
               }),
             }}
             onMouseEnter={e => {
               if (activeCategory !== cat) {
-                e.currentTarget.style.borderColor = 'rgba(0,212,255,0.5)';
-                e.currentTarget.style.color = '#f0f4ff';
+                e.currentTarget.style.borderColor = 'var(--filter-hover-border)';
+                e.currentTarget.style.color = 'var(--filter-hover-color)';
               }
             }}
             onMouseLeave={e => {
               if (activeCategory !== cat) {
-                e.currentTarget.style.borderColor = 'rgba(0,212,255,0.2)';
-                e.currentTarget.style.color = '#8899aa';
+                e.currentTarget.style.borderColor = 'var(--filter-inactive-border)';
+                e.currentTarget.style.color = 'var(--filter-inactive-color)';
               }
             }}
           >{cat}</button>

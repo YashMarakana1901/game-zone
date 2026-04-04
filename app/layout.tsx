@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { FavoritesProvider } from "@/components/Favorites";
+import { ThemeProvider } from "@/components/ThemeContext";
 import CookieBanner from "@/components/CookieBanner";
 
 export const metadata: Metadata = {
@@ -36,10 +37,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <FavoritesProvider>
-          {children}
-          <CookieBanner />
-        </FavoritesProvider>
+        <ThemeProvider>
+          <FavoritesProvider>
+            {children}
+            <CookieBanner />
+          </FavoritesProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
