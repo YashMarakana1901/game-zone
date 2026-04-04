@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { games } from '@/lib/games';
 import { useFavorites } from '@/components/Favorites';
 import { useTheme } from '@/components/ThemeContext';
- 
+
 import { FaHeart } from "react-icons/fa";
 import { MdGridView, MdHotTub } from "react-icons/md";
 import { HiSparkles } from "react-icons/hi2";
@@ -51,22 +51,24 @@ export default function Navbar() {
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   const navLinks = [
-  { label: 'Hot',        icon: <MdHotTub size={18} />, href: '/#hot' },
-  { label: 'New',        icon: <HiSparkles size={18} />,         href: '/#new' },
-  { label: 'Categories', icon: <MdGridView size={18} />,         href: '/category/Action' },
-  {
-    label: `Favorites${favorites.length > 0 ? ` (${favorites.length})` : ''}`,
-    icon: <FaHeart size={16} />,
-    href: '/favorites',
-  },
-];
+    { label: 'Hot', icon: <MdHotTub size={18} />, href: '/#hot' },
+    { label: 'New', icon: <HiSparkles size={18} />, href: '/#new' },
+    { label: 'Categories', icon: <MdGridView size={18} />, href: '/category/Action' },
+    {
+      label: `Favorites${favorites.length > 0 ? ` (${favorites.length})` : ''}`,
+      icon: <FaHeart size={16} />,
+      href: '/favorites',
+    },
+  ];
 
- {navLinks.map((link) => (
-  <a key={link.href} href={link.href} className="flex items-center gap-1.5">
-    {link.icon}
-    <span>{link.label}</span>
-  </a>
-))}
+  {
+    navLinks.map((link) => (
+      <a key={link.href} href={link.href} className="flex items-center gap-1.5">
+        {link.icon}
+        <span>{link.label}</span>
+      </a>
+    ))
+  }
   return (
     <>
       <nav style={{
@@ -101,17 +103,20 @@ export default function Navbar() {
 
         {/* Desktop Nav Links */}
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center', flexShrink: 0 }}
-             className="desktop-nav">
+          className="desktop-nav">
           {navLinks.map(item => (
             <Link key={item.label} href={item.href} style={{
-              textDecoration: 'none', color: pathname === item.href ? 'var(--neon-blue)' : 'var(--text-secondary)',
+              textDecoration: 'none',
+              color: pathname === item.href ? 'var(--neon-blue)' : 'var(--text-secondary)',
               fontFamily: "'Rajdhani', sans-serif",
               fontWeight: 600, fontSize: '13px',
               letterSpacing: '0.5px',
               transition: 'color 0.2s', whiteSpace: 'nowrap',
+              display: 'flex', alignItems: 'center', gap: '6px', // 👈 add this
             }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-blue)')}
-            onMouseLeave={e => (e.currentTarget.style.color = pathname === item.href ? 'var(--neon-blue)' : 'var(--text-secondary)')}>
+              onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-blue)')}
+              onMouseLeave={e => (e.currentTarget.style.color = pathname === item.href ? 'var(--neon-blue)' : 'var(--text-secondary)')}>
+              {item.icon}  {/* 👈 add this */}
               {item.label}
             </Link>
           ))}
@@ -170,10 +175,10 @@ export default function Navbar() {
                     transition: 'background 0.15s',
                     borderBottom: '1px solid var(--suggestion-item-border)',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--suggestion-hover)')}
-                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                    onMouseEnter={e => (e.currentTarget.style.background = 'var(--suggestion-hover)')}
+                    onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
                     <span style={{ fontSize: '20px' }}>
-                      {['🎮','🕹️','🎯','🏎️','⚽','🗺️','👾','🎱','🔫','🧩'][parseInt(game.id) % 10]}
+                      {['🎮', '🕹️', '🎯', '🏎️', '⚽', '🗺️', '👾', '🎱', '🔫', '🧩'][parseInt(game.id) % 10]}
                     </span>
                     <div>
                       <div style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700, fontSize: '14px', color: 'var(--text-primary)' }}>
@@ -193,8 +198,8 @@ export default function Navbar() {
                   fontFamily: "'Rajdhani', sans-serif", fontWeight: 600, fontSize: '13px',
                   cursor: 'pointer', transition: 'background 0.15s',
                 }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'var(--suggestion-hover)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                  onMouseEnter={e => (e.currentTarget.style.background = 'var(--suggestion-hover)')}
+                  onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
                   🔍 See all results for &ldquo;{query}&rdquo;
                 </div>
               </Link>
@@ -262,8 +267,8 @@ export default function Navbar() {
                 borderRadius: '8px',
                 transition: 'background 0.15s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.background = 'var(--overlay-hover)')}
-              onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
+                onMouseEnter={e => (e.currentTarget.style.background = 'var(--overlay-hover)')}
+                onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}>
                 {item.label}
               </div>
             </Link>
