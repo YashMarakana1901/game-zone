@@ -38,8 +38,8 @@ export default function Footer() {
                   cursor: 'pointer', fontSize: '14px',
                   transition: 'border-color 0.2s',
                 }} title={s}
-                onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--neon-blue)')}
-                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--social-border)')}>
+                  onMouseEnter={e => (e.currentTarget.style.borderColor = 'var(--neon-blue)')}
+                  onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--social-border)')}>
                   {s === 'Twitter' ? '𝕏' : s === 'Discord' ? '💬' : '▶'}
                 </div>
               ))}
@@ -61,8 +61,8 @@ export default function Footer() {
                     fontFamily: "'Rajdhani', sans-serif", fontWeight: 500,
                     transition: 'color 0.2s', cursor: 'pointer',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-blue)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-blue)')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
                     {cat}
                   </span>
                 </Link>
@@ -79,11 +79,11 @@ export default function Footer() {
             }}>Quick Links</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {[
-                { label: '🔥 Hot Games', href: '/#hot' },
-                { label: '✨ New Games', href: '/#new' },
-                { label: '🏆 Leaderboard', href: '/leaderboard' },
-                { label: '❤️ Favorites', href: '/favorites' },
-                { label: '🔍 Search', href: '/search' },
+                { label: 'Hot Games', href: '/#hot' },
+                { label: 'New Games', href: '/#new' },
+                { label: 'Leaderboard', href: '/leaderboard' },
+                { label: 'Favorites', href: '/favorites' },
+                { label: 'Search', href: '/search' },
               ].map(link => (
                 <Link key={link.label} href={link.href} style={{ textDecoration: 'none' }}>
                   <span style={{
@@ -91,8 +91,8 @@ export default function Footer() {
                     fontFamily: "'Rajdhani', sans-serif", fontWeight: 500,
                     transition: 'color 0.2s', cursor: 'pointer',
                   }}
-                  onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-purple)')}
-                  onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
+                    onMouseEnter={e => (e.currentTarget.style.color = 'var(--neon-purple)')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-secondary)')}>
                     {link.label}
                   </span>
                 </Link>
@@ -141,8 +141,8 @@ export default function Footer() {
                 color: 'var(--text-muted)', textDecoration: 'none', fontSize: '12px',
                 fontFamily: "'Inter', sans-serif", transition: 'color 0.2s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
-              onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--text-secondary)')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>
                 {item}
               </a>
             ))}

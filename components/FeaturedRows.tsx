@@ -2,6 +2,7 @@
 
 import { hotGames, newGames } from '@/lib/games';
 import GameCard from './GameCard';
+import { GiHotMeal, GiNewShoot } from 'react-icons/gi';
 
 interface GameRowProps {
   title: string;
@@ -45,8 +46,8 @@ function GameRow({ title, emoji, games, id }: GameRowProps) {
 export default function FeaturedRows() {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', paddingTop: '8px' }}>
-      <GameRow id="hot" title="HOT GAMES" emoji="🔥" games={hotGames} />
-      <GameRow id="new" title="NEW GAMES" emoji="✨" games={newGames} />
+      <GameRow id="hot" title="HOT GAMES" emoji={<GiHotMeal />} games={hotGames} />
+      <GameRow id="new" title="NEW GAMES" emoji={<GiNewShoot />} games={newGames} />
     </div>
   );
 }

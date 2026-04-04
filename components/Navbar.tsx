@@ -6,6 +6,12 @@ import { useRouter, usePathname } from 'next/navigation';
 import { games } from '@/lib/games';
 import { useFavorites } from '@/components/Favorites';
 import { useTheme } from '@/components/ThemeContext';
+ 
+import { FaHeart } from "react-icons/fa";
+import { MdGridView, MdHotTub } from "react-icons/md";
+import { HiSparkles } from "react-icons/hi2";
+
+
 
 export default function Navbar() {
   const [query, setQuery] = useState('');
@@ -45,12 +51,22 @@ export default function Navbar() {
   useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   const navLinks = [
-    { label: '🔥 Hot', href: '/#hot' },
-    { label: '✨ New', href: '/#new' },
-    { label: '🗂️ Categories', href: '/category/Action' },
-    { label: `❤️ Favorites${favorites.length > 0 ? ` (${favorites.length})` : ''}`, href: '/favorites' },
-  ];
+  { label: 'Hot',        icon: <MdHotTub size={18} />, href: '/#hot' },
+  { label: 'New',        icon: <HiSparkles size={18} />,         href: '/#new' },
+  { label: 'Categories', icon: <MdGridView size={18} />,         href: '/category/Action' },
+  {
+    label: `Favorites${favorites.length > 0 ? ` (${favorites.length})` : ''}`,
+    icon: <FaHeart size={16} />,
+    href: '/favorites',
+  },
+];
 
+ {navLinks.map((link) => (
+  <a key={link.href} href={link.href} className="flex items-center gap-1.5">
+    {link.icon}
+    <span>{link.label}</span>
+  </a>
+))}
   return (
     <>
       <nav style={{

@@ -9,12 +9,45 @@ import GameCard from '@/components/GameCard';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
 
+import {
+  GiRunningNinja,       // Action
+  GiPuzzle,            // Puzzle
+  GiSteeringWheel,     // Racing
+  GiSoccerBall,        // Sports
+  GiTreasureMap,       // Adventure
+  GiBarricade,            // Arcade
+  GiPistolGun,         // Shooting
+  GiChessKnight,       // Strategy
+  GiCardboardBox,      // Casual
+  GiGamepad,           // fallback
+} from "react-icons/gi";
+import { IconType } from "react-icons";
+
+const categoryIconMap: Record<string, IconType> = {
+  Action:    GiRunningNinja,
+  Puzzle:    GiPuzzle,
+  Racing:    GiSteeringWheel,
+  Sports:    GiSoccerBall,
+  Adventure: GiTreasureMap,
+  Arcade:    GiBarricade,
+  Shooting:  GiPistolGun,
+  Strategy:  GiChessKnight,
+  Casual:    GiCardboardBox,
+};
+
+export function getCategoryIcon(category: string) {
+  const Icon = categoryIconMap[category] ?? GiGamepad;
+  return <Icon size={24} />;
+}
+
 export default function GamePage() {
   const params = useParams();
   const slug = params?.slug as string;
   const game = games.find(g => g.url === `/game/${slug}`);
   const related = games.filter(g => g.id !== game?.id).slice(0, 6);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  
 
   if (!game) {
     return (
@@ -63,9 +96,7 @@ export default function GamePage() {
               padding: '14px 20px',
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                <span style={{ fontSize: '24px' }}>
-                  {['🎮','🕹️','🎯','🏎️','⚽','🗺️','👾','🎱','🔫','🧩'][parseInt(game.id) % 10]}
-                </span>
+               {getCategoryIcon(game.category)}
                 <div>
                   <h1 style={{
                     fontFamily: "'Orbitron', monospace",
@@ -75,7 +106,7 @@ export default function GamePage() {
                   <div style={{ display: 'flex', gap: '12px', marginTop: '4px' }}>
                     <span style={{ color: '#ffd700', fontSize: '12px' }}>★ {game.rating}</span>
                     <span style={{ color: '#8899aa', fontSize: '12px', fontFamily: "'Inter', sans-serif" }}>{game.plays} plays</span>
-                    {game.isHot && <span style={{ color: '#ff6b00', fontSize: '12px' }}>🔥 Hot</span>}
+                    {game.isHot && <span style={{ color: '#ff6b00', fontSize: '12px' }}>Hot</span>}
                   </div>
                 </div>
               </div>

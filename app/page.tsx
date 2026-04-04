@@ -15,21 +15,22 @@ export default function Home() {
         <AdBanner type="leaderboard" />
       </div>
 
-      <HeroBanner />
+      {/* <HeroBanner /> */}
+       <GamesGrid />
 
       {/* Below hero ad */}
       <div style={{ padding: '4px 24px 24px', maxWidth: '1200px', margin: '0 auto' }}>
         <AdBanner type="leaderboard" />
       </div>
 
-      <FeaturedRows />
-
       {/* Mid page ad */}
       <div style={{ padding: '0 24px 32px', maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'center' }}>
         <AdBanner type="rectangle" />
       </div>
 
-      <GamesGrid />
+      <FeaturedRows />
+
+      {/* <GamesGrid /> */}
 
       {/* Bottom ad */}
       <div style={{ padding: '0 24px 40px', maxWidth: '1200px', margin: '0 auto' }}>

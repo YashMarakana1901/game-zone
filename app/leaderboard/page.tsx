@@ -6,6 +6,7 @@ import Navbar from '@/components/Navbar';
 import AdBanner from '@/components/AdBanner';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { GiHotMeal, GiNewShoot } from 'react-icons/gi';
 
 type SortBy = 'plays' | 'rating' | 'new';
 
@@ -145,8 +146,8 @@ export default function LeaderboardPage() {
                       border: '1px solid rgba(0,212,255,0.15)',
                       color: '#00d4ff', padding: '1px 8px', borderRadius: '4px', fontSize: '11px',
                     }}>{game.category}</span>
-                    {game.isHot && <span style={{ color: '#ff6b00' }}>🔥 Hot</span>}
-                    {game.isNew && <span style={{ color: '#00ff88' }}>✨ New</span>}
+                    {game.isHot && <span style={{ color: '#ff6b00' }}><GiHotMeal /> Hot</span>}
+                    {game.isNew && <span style={{ color: '#00ff88' }}><GiNewShoot /> New</span>}
                   </div>
                 </div>
 

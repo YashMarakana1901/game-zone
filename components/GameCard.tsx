@@ -3,6 +3,45 @@
 import Link from 'next/link';
 import { Game } from '@/lib/games';
 import { FavoriteButton } from '@/components/Favorites';
+import {
+  GiPistolGun,
+  GiPuzzle,
+  GiRaceCar,
+  GiSoccerBall, 
+  GiBulletBill,
+  GiChessKnight,
+  GiGamepad,
+  GiDiamonds,
+  GiTreasureMap,
+  GiCardAceDiamonds,
+} from 'react-icons/gi';
+import { FaFire, FaStarHalfAlt } from 'react-icons/fa';
+import { MdNewReleases, MdStar } from 'react-icons/md';
+import { IoGameController } from 'react-icons/io5';
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  Action:    <GiPistolGun size={40} />,
+  Puzzle:    <GiPuzzle size={40} />,
+  Racing:    <GiRaceCar size={40} />,
+  Sports:    <GiSoccerBall size={40} />,
+  Adventure: <GiTreasureMap size={40} />,
+  Arcade:    <GiCardAceDiamonds size={40} />,
+  Shooting:  <GiBulletBill size={40} />,
+  Strategy:  <GiChessKnight size={40} />,
+  Casual:    <GiDiamonds size={40} />,
+};
+
+const categoryColors: Record<string, string> = {
+  Action:    '220, 60%, 18%',
+  Puzzle:    '280, 55%, 18%',
+  Racing:    '15, 70%, 18%',
+  Sports:    '140, 55%, 14%',
+  Adventure: '40, 65%, 16%',
+  Arcade:    '190, 60%, 16%',
+  Shooting:  '350, 60%, 18%',
+  Strategy:  '260, 50%, 18%',
+  Casual:    '310, 50%, 16%',
+};
 
 interface GameCardProps {
   game: Game;
@@ -11,13 +50,16 @@ interface GameCardProps {
 
 export default function GameCard({ game, size = 'normal' }: GameCardProps) {
   const isLarge = size === 'large';
+  const Icon = categoryIcons[game.category] ?? <IoGameController size={40} />;
+  const colorBase = categoryColors[game.category] ?? '200, 60%, 16%';
 
   return (
     <Link href={game.url} style={{ textDecoration: 'none' }}>
       <div
+        className="game-card"
         style={{
           background: 'var(--bg-card)',
-          borderRadius: '12px',
+          borderRadius: '14px',
           overflow: 'hidden',
           border: '1px solid var(--card-border)',
           cursor: 'pointer',
@@ -26,8 +68,8 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
         }}
         onMouseEnter={e => {
           const el = e.currentTarget as HTMLDivElement;
-          el.style.transform = 'translateY(-6px) scale(1.02)';
-          el.style.boxShadow = '0 16px 40px rgba(0,0,0,0.2), 0 0 24px color-mix(in srgb, var(--neon-blue) 20%, transparent)';
+          el.style.transform = 'translateY(-7px) scale(1.025)';
+          el.style.boxShadow = '0 20px 48px rgba(0,0,0,0.35), 0 0 28px color-mix(in srgb, var(--neon-blue) 25%, transparent)';
           el.style.borderColor = 'var(--card-border-hover)';
         }}
         onMouseLeave={e => {
@@ -41,59 +83,83 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
         <div style={{
           position: 'relative',
           height: isLarge ? '200px' : '140px',
-          background: `linear-gradient(135deg, 
-            hsl(${parseInt(game.id) * 40}, 60%, 20%), 
-            hsl(${parseInt(game.id) * 40 + 60}, 70%, 15%))`,
+          background: `linear-gradient(135deg, hsl(${colorBase}), hsl(${colorBase.split(',')[0]}, 65%, 10%))`,
           overflow: 'hidden',
         }}>
+          {/* Animated grid bg */}
+          <div style={{
+            position: 'absolute', inset: 0,
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 24px, rgba(255,255,255,0.03) 24px, rgba(255,255,255,0.03) 25px), repeating-linear-gradient(90deg, transparent, transparent 24px, rgba(255,255,255,0.03) 24px, rgba(255,255,255,0.03) 25px)',
+          }} />
+          {/* Glow orb */}
+          <div style={{
+            position: 'absolute', top: '50%', left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: '80px', height: '80px',
+            background: 'radial-gradient(circle, rgba(0,212,255,0.2) 0%, transparent 70%)',
+            borderRadius: '50%',
+          }} />
+
+          {/* Icon */}
           <div style={{
             width: '100%', height: '100%',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
+            color: 'rgba(255,255,255,0.75)',
+            filter: 'drop-shadow(0 0 12px rgba(0,212,255,0.4))',
             fontSize: isLarge ? '64px' : '48px',
           }}>
-            {['🎮','🕹️','🎯','🏎️','⚽','🗺️','👾','🎱','🔫','🧩'][parseInt(game.id) % 10]}
+            {Icon}
           </div>
 
           {/* Play overlay */}
-          <div style={{
-            position: 'absolute', inset: 0,
-            background: 'rgba(0,0,0,0.6)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            opacity: 0,
-            transition: 'opacity 0.2s',
-          }}
-          className="play-overlay">
+          <div
+            style={{
+              position: 'absolute', inset: 0,
+              background: 'rgba(0,0,0,0.65)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              opacity: 0,
+              transition: 'opacity 0.22s',
+            }}
+            className="play-overlay"
+          >
             <div style={{
-              width: '52px', height: '52px',
+              width: '56px', height: '56px',
               background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
               borderRadius: '50%',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '20px',
-              boxShadow: '0 0 20px color-mix(in srgb, var(--neon-blue) 60%, transparent)',
+              color: 'white',
+              fontSize: '22px',
+              boxShadow: '0 0 24px color-mix(in srgb, var(--neon-blue) 70%, transparent)',
             }}>▶</div>
           </div>
 
           {/* Badges */}
-          <div style={{ position: 'absolute', top: '8px', left: '8px', display: 'flex', gap: '4px' }}>
+          <div style={{ position: 'absolute', top: '8px', left: '8px', display: 'flex', gap: '4px', flexWrap: 'wrap' }}>
             {game.isHot && (
               <span style={{
                 background: 'linear-gradient(135deg, #ff6b00, #ff2d78)',
                 color: 'white', fontSize: '10px', fontWeight: 700,
-                padding: '2px 8px', borderRadius: '20px',
+                padding: '3px 8px', borderRadius: '20px',
                 fontFamily: "'Orbitron', monospace", letterSpacing: '0.5px',
-              }}>🔥 HOT</span>
+                display: 'flex', alignItems: 'center', gap: '3px',
+              }}>
+                <FaFire size={9} /> HOT
+              </span>
             )}
             {game.isNew && (
               <span style={{
                 background: 'linear-gradient(135deg, #00ff88, #00d4ff)',
                 color: '#06080f', fontSize: '10px', fontWeight: 700,
-                padding: '2px 8px', borderRadius: '20px',
+                padding: '3px 8px', borderRadius: '20px',
                 fontFamily: "'Orbitron', monospace", letterSpacing: '0.5px',
-              }}>NEW</span>
+                display: 'flex', alignItems: 'center', gap: '3px',
+              }}>
+                <MdNewReleases size={10} /> NEW
+              </span>
             )}
           </div>
 
-          {/* Favorite heart */}
+          {/* Favorite button */}
           <FavoriteButton gameId={game.id} />
 
           {/* Category tag */}
@@ -110,32 +176,37 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
         </div>
 
         {/* Info */}
-        <div style={{ padding: isLarge ? '16px' : '12px' }}>
+        <div style={{ padding: isLarge ? '14px 16px' : '11px 12px' }}>
           <h3 style={{
             fontFamily: "'Orbitron', monospace",
-            fontSize: isLarge ? '15px' : '13px',
+            fontSize: isLarge ? '14px' : '12px',
             fontWeight: 700,
             color: 'var(--text-primary)',
             marginBottom: '6px',
-            letterSpacing: '0.5px',
+            letterSpacing: '0.3px',
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
           }}>{game.title}</h3>
 
           {isLarge && (
             <p style={{
               color: 'var(--text-secondary)',
-              fontSize: '12px',
+              fontSize: '11px',
               marginBottom: '10px',
               fontFamily: "'Inter', sans-serif",
-              lineHeight: 1.4,
+              lineHeight: 1.45,
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
             }}>{game.description}</p>
           )}
 
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <span style={{ color: '#ffd700', fontSize: '12px' }}>★</span>
-              <span style={{ color: 'var(--text-primary)', fontSize: '12px', fontWeight: 600 }}>{game.rating}</span>
+              <MdStar size={13} color="#ffd700" />
+              <span style={{ color: 'var(--text-primary)', fontSize: '12px', fontWeight: 700 }}>{game.rating}</span>
             </div>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '11px', fontFamily: "'Inter', sans-serif" }}>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '10px', fontFamily: "'Inter', sans-serif" }}>
               {game.plays} plays
             </span>
           </div>
@@ -144,6 +215,7 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
 
       <style>{`
         a:hover .play-overlay { opacity: 1 !important; }
+        .game-card { will-change: transform; }
       `}</style>
     </Link>
   );
