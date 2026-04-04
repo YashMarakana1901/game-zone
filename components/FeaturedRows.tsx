@@ -1,17 +1,18 @@
 'use client';
 
 import { hotGames, newGames } from '@/lib/games';
-import GameCard from './GameCard';
-import { GiHotMeal, GiNewShoot } from 'react-icons/gi';
+import GameCard from './GameCard'; 
+import { HiSparkles } from "react-icons/hi2"; 
+import { MdWhatshot } from 'react-icons/md';
 
 interface GameRowProps {
   title: string;
-  emoji: string;
+  icon: React.ReactNode;
   games: typeof hotGames;
   id?: string;
 }
 
-function GameRow({ title, emoji, games, id }: GameRowProps) {
+function GameRow({ title, icon, games, id }: GameRowProps) {
   return (
     <section id={id} style={{ padding: '0 0 40px' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '20px', padding: '0 24px' }}>
@@ -24,7 +25,11 @@ function GameRow({ title, emoji, games, id }: GameRowProps) {
           fontFamily: "'Orbitron', monospace",
           fontSize: '20px', fontWeight: 700,
           color: 'var(--text-primary)', letterSpacing: '1px',
-        }}>{emoji} {title}</h2>
+          display: 'flex', alignItems: 'center', gap: '8px',
+        }}>
+          {icon}
+          {title}
+        </h2>
       </div>
 
       <div style={{
@@ -46,8 +51,18 @@ function GameRow({ title, emoji, games, id }: GameRowProps) {
 export default function FeaturedRows() {
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto', paddingTop: '8px' }}>
-      <GameRow id="hot" title="HOT GAMES" emoji={<GiHotMeal />} games={hotGames} />
-      <GameRow id="new" title="NEW GAMES" emoji={<GiNewShoot />} games={newGames} />
+      <GameRow
+        id="hot"
+        title="HOT GAMES"
+        icon={<MdWhatshot size={22} color="var(--neon-blue)" />}
+        games={hotGames}
+      />
+      <GameRow
+        id="new"
+        title="NEW GAMES"
+        icon={<HiSparkles size={20} color="var(--neon-purple)" />}
+        games={newGames}
+      />
     </div>
   );
 }
