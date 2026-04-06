@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { FaHome, FaSearch } from 'react-icons/fa';
 
 export default function NotFound() {
   return (
@@ -66,7 +67,7 @@ export default function NotFound() {
               textTransform: 'uppercase',
               boxShadow: '0 0 20px color-mix(in srgb, var(--neon-blue) 30%, transparent)',
             }}>
-              🏠 Back to Home
+              <FaHome /> Back to Home
             </button>
           </Link>
           <Link href="/search" style={{ textDecoration: 'none' }}>
@@ -79,7 +80,7 @@ export default function NotFound() {
               fontWeight: 600, fontSize: '13px',
               letterSpacing: '1px', cursor: 'pointer',
             }}>
-              🔍 Search Games
+              <FaSearch /> Search Games
             </button>
           </Link>
         </div>

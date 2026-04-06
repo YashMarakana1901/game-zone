@@ -8,6 +8,7 @@ import GameCard from '@/components/GameCard';
 import AdBanner from '@/components/AdBanner';
 import Footer from '@/components/Footer';
 import { Suspense } from 'react';
+import { FaSearch } from 'react-icons/fa';
 
 function SearchContent() {
   const searchParams = useSearchParams();
@@ -45,7 +46,7 @@ function SearchContent() {
             maxWidth: '600px',
             boxShadow: '0 0 20px color-mix(in srgb, var(--neon-blue) 10%, transparent)',
           }}>
-            <span style={{ fontSize: '18px' }}>🔍</span>
+            <span style={{ fontSize: '18px' }}> <FaSearch /> </span>
             <input
               autoFocus
               type="text"

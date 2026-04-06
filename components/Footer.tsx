@@ -22,7 +22,7 @@ export default function Footer() {
                 background: 'linear-gradient(135deg, var(--neon-blue), var(--neon-purple))',
                 WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 marginBottom: '12px', letterSpacing: '2px', display: 'inline-block',
-              }}>🎮 GAMEZONE</div>
+              }}>🎮 PokiGame</div>
             </Link>
             <p style={{ color: 'var(--text-secondary)', fontSize: '14px', fontFamily: "'Inter', sans-serif", lineHeight: 1.6 }}>
               Your #1 destination for free online browser games. No downloads, no sign-up.
@@ -110,7 +110,7 @@ export default function Footer() {
             <p style={{ color: 'var(--text-secondary)', fontSize: '13px', fontFamily: "'Inter', sans-serif", lineHeight: 1.6, marginBottom: '16px' }}>
               Reach millions of gamers with your ads. Multiple ad formats available.
             </p>
-            <a href="mailto:ads@gamezone.com" style={{ textDecoration: 'none' }}>
+            <a href="mailto:ads@PokiGame.com" style={{ textDecoration: 'none' }}>
               <button style={{
                 background: 'linear-gradient(135deg, #ff6b00, #ff2d78)',
                 color: 'white', border: 'none',
@@ -133,7 +133,7 @@ export default function Footer() {
           alignItems: 'center',
         }}>
           <p style={{ color: 'var(--text-muted)', fontSize: '13px', fontFamily: "'Inter', sans-serif" }}>
-            © {year} GameZone. All rights reserved.
+            © {year} PokiGame. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: '20px' }}>
             {['Privacy Policy', 'Terms of Service', 'DMCA'].map(item => (

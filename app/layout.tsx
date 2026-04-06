@@ -6,20 +6,20 @@ import CookieBanner from "@/components/CookieBanner";
 
 export const metadata: Metadata = {
   title: {
-    default: "GameZone – Free Online Games",
-    template: "%s | GameZone",
+    default: "PokiGame – Free Online Games",
+    template: "%s | PokiGame",
   },
   description: "Play 1000+ free online browser games instantly. Action, puzzle, racing, sports, adventure and more. No download, no sign-up required!",
   keywords: ["free online games", "browser games", "play games online", "free games no download"],
   openGraph: {
-    title: "GameZone – Free Online Games",
+    title: "PokiGame – Free Online Games",
     description: "Play 1000+ free online browser games. No download required!",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "GameZone – Free Online Games",
+    title: "PokiGame – Free Online Games",
     description: "Play 1000+ free online browser games. No download required!",
   },
   robots: { index: true, follow: true },
