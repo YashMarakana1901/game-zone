@@ -9,6 +9,7 @@ import { HiSparkles } from 'react-icons/hi2';
 import { IoGameController, IoGridSharp } from 'react-icons/io5';
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md';
 import { RiSwordFill, RiPuzzleFill, RiSpeedUpFill, RiFootballFill } from 'react-icons/ri';
+import AdBanner from './AdBanner';
 
 /* ── Animated counter ────────────────────────────────────────────── */
 function AnimatedCount({ target, suffix = '' }: { target: number; suffix?: string }) {
@@ -131,17 +132,17 @@ function FeaturedCard({ game }: { game: (typeof games)[0] }) {
       {/* Bg orbs */}
       {[
         { top: '-70px', right: '-70px', size: '300px', color: 'rgba(140,60,240,0.28)' },
-        { bottom: '-50px', left: '10px',  size: '220px', color: 'rgba(0,200,255,0.18)' },
-        { top: '40%',   left: '42%',     size: '150px', color: 'rgba(255,30,100,0.1)' },
+        { bottom: '-50px', left: '10px', size: '220px', color: 'rgba(0,200,255,0.18)' },
+        { top: '40%', left: '42%', size: '150px', color: 'rgba(255,30,100,0.1)' },
       ].map((orb, i) => (
         <div key={i} style={{
           position: 'absolute', borderRadius: '50%', pointerEvents: 'none',
           width: orb.size, height: orb.size,
           background: `radial-gradient(circle, ${orb.color} 0%, transparent 65%)`,
-          ...(orb.top    ? { top: orb.top }       : {}),
+          ...(orb.top ? { top: orb.top } : {}),
           ...(orb.bottom ? { bottom: orb.bottom } : {}),
-          ...(orb.left   ? { left: orb.left }     : {}),
-          ...(orb.right  ? { right: orb.right }   : {}),
+          ...(orb.left ? { left: orb.left } : {}),
+          ...(orb.right ? { right: orb.right } : {}),
         }} />
       ))}
 
@@ -274,10 +275,10 @@ function StatsStrip() {
 function CategoryBanners() {
   const { isDark } = useTheme();
   const banners = [
-    { label: 'Action',  icon: <RiSwordFill size={20} />,    accent: '#4d8eff', count: games.filter(g => g.category === 'Action').length },
-    { label: 'Puzzle',  icon: <RiPuzzleFill size={20} />,   accent: '#c084fc', count: games.filter(g => g.category === 'Puzzle').length },
-    { label: 'Racing',  icon: <RiSpeedUpFill size={20} />,  accent: '#fb923c', count: games.filter(g => g.category === 'Racing').length },
-    { label: 'Sports',  icon: <RiFootballFill size={20} />, accent: '#4ade80', count: games.filter(g => g.category === 'Sports').length },
+    { label: 'Action', icon: <RiSwordFill size={20} />, accent: '#4d8eff', count: games.filter(g => g.category === 'Action').length },
+    { label: 'Puzzle', icon: <RiPuzzleFill size={20} />, accent: '#c084fc', count: games.filter(g => g.category === 'Puzzle').length },
+    { label: 'Racing', icon: <RiSpeedUpFill size={20} />, accent: '#fb923c', count: games.filter(g => g.category === 'Racing').length },
+    { label: 'Sports', icon: <RiFootballFill size={20} />, accent: '#4ade80', count: games.filter(g => g.category === 'Sports').length },
   ];
   return (
     <div className="cat-banners" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '12px', marginBottom: '48px' }}>
@@ -328,133 +329,153 @@ export default function GamesGrid() {
   const [visibleCount, setVisibleCount] = useState(20);
   const { isDark } = useTheme();
 
-  const filtered   = activeCategory === 'All' ? games : games.filter(g => g.category === activeCategory);
-  const hotGames   = games.filter(g => g.isHot).slice(0, 12);
-  const newGames   = games.filter(g => g.isNew).slice(0, 12);
-  const topRated   = [...games].sort((a, b) => Number(b.rating) - Number(a.rating)).slice(0, 12);
-  const featured   = games.find(g => g.isHot) ?? games[0];
+  const filtered = activeCategory === 'All' ? games : games.filter(g => g.category === activeCategory);
+  const hotGames = games.filter(g => g.isHot).slice(0, 15);
+  const newGames = games.filter(g => g.isNew).slice(0, 15);
+  const topRated = [...games].sort((a, b) => Number(b.rating) - Number(a.rating)).slice(0, 15);
+  const featured = games.find(g => g.isHot) ?? games[0];
 
   return (
-    <div style={{ padding: '0 28px 60px', maxWidth: '1200px', margin: '0 auto' }}>
+    <div style={{ padding: '0 24px 80px', maxWidth: '1300px', margin: '0 auto' }}>
 
-        {/* All Games */}
-      <div id="all-games" style={{ animation: 'fadeUp 0.5s ease 0.3s both' }}>
-        <SectionHeader icon={<IoGridSharp size={16} />} title="ALL GAMES" accent="#00d4ff" sub={`${filtered.length} games available`} />
+      {/* Featured Hero */}
+      {/* <div style={{ marginBottom: '60px', animation: 'fadeUp 0.6s ease both' }}>
+        <FeaturedCard game={featured} />
+      </div> */}
 
-        {/* Filter chips */}
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '28px' }}>
-          {categories.map((cat, i) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button key={cat} onClick={() => { setActiveCategory(cat); setVisibleCount(20); }}
-                style={{
-                  padding: '7px 18px', borderRadius: '20px',
-                  fontSize: '12px', fontWeight: 700, cursor: 'pointer',
-                  transition: 'all 0.22s cubic-bezier(0.34,1.56,0.64,1)',
-                  fontFamily: "'Rajdhani', sans-serif", letterSpacing: '0.5px',
-                  border: '1px solid',
-                  animation: `fadeUp 0.3s ease ${i * 0.02}s both`,
-                  ...(isActive ? {
-                    background: 'linear-gradient(135deg, #00d4ff, #a855f7)',
-                    borderColor: 'transparent', color: 'white',
-                    boxShadow: '0 4px 18px rgba(0,212,255,0.4)',
-                    transform: 'translateY(-2px)',
-                  } : {
-                    background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.75)',
-                    borderColor: 'var(--filter-inactive-border)',
-                    color: 'var(--filter-inactive-color)',
-                  }),
-                }}
-                onMouseEnter={e => { if (!isActive) { const b = e.currentTarget as HTMLButtonElement; b.style.borderColor = 'rgba(0,212,255,0.45)'; b.style.color = '#00d4ff'; b.style.transform = 'translateY(-2px)'; b.style.background = isDark ? 'rgba(0,212,255,0.07)' : 'rgba(0,212,255,0.06)'; } }}
-                onMouseLeave={e => { if (!isActive) { const b = e.currentTarget as HTMLButtonElement; b.style.borderColor = 'var(--filter-inactive-border)'; b.style.color = 'var(--filter-inactive-color)'; b.style.transform = ''; b.style.background = isDark ? 'rgba(255,255,255,0.04)' : 'rgba(255,255,255,0.75)'; } }}
-              >{cat}</button>
-            );
-          })}
+      {/* Stats & Quick Categories */}
+      {/* <div style={{ marginBottom: '60px' }}>
+        <StatsStrip />
+        <CategoryBanners />
+      </div> */}
+
+      {/* All Games Grid (Bottom) */}
+      <div id="all-games" style={{ animation: 'fadeUp 0.7s ease 0.4s both' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '32px', flexWrap: 'wrap', gap: '20px' }}>
+          <SectionHeader
+            icon={<IoGridSharp size={18} />}
+            title="DISCOVER ALL"
+            accent="#00d4ff"
+            sub={`${filtered.length} games to explore`}
+          />
+
+          {/* Filter chips */}
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            {categories.map((cat, i) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => { setActiveCategory(cat); setVisibleCount(20); }}
+                  style={{
+                    padding: '8px 20px', borderRadius: '30px',
+                    fontSize: '13px', fontWeight: 700, cursor: 'pointer',
+                    transition: 'all 0.3s cubic-bezier(0.2, 0, 0, 1)',
+                    fontFamily: "'Rajdhani', sans-serif", letterSpacing: '0.5px',
+                    border: '1px solid',
+                    ...(isActive ? {
+                      background: 'var(--accent-gradient)',
+                      borderColor: 'transparent', color: 'white',
+                      boxShadow: '0 8px 20px rgba(0,212,255,0.4)',
+                      transform: 'translateY(-2px)',
+                    } : {
+                      background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
+                      borderColor: 'var(--filter-inactive-border)',
+                      color: 'var(--filter-inactive-color)',
+                    }),
+                  }}
+                  onMouseEnter={e => { if (!isActive) { const b = e.currentTarget as HTMLButtonElement; b.style.borderColor = 'var(--neon-blue)'; b.style.color = 'var(--neon-blue)'; b.style.transform = 'translateY(-2px)'; } }}
+                  onMouseLeave={e => { if (!isActive) { const b = e.currentTarget as HTMLButtonElement; b.style.borderColor = 'var(--filter-inactive-border)'; b.style.color = 'var(--filter-inactive-color)'; b.style.transform = ''; } }}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         {/* Grid */}
-        <div style={{ display: 'grid', marginBottom: '52px', gridTemplateColumns: 'repeat(auto-fill, minmax(175px, 1fr))', gap: '16px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '24px', marginBottom: '60px' }}>
           {filtered.slice(0, visibleCount).map((game, i) => (
-            <div key={game.id} style={{ animation: `fadeUp 0.35s ease ${(i % 20) * 0.025}s both` }}>
+            <div key={game.id} style={{ animation: `fadeUp 0.5s ease ${(i % 20) * 0.03}s both` }}>
               <GameCard game={game} />
             </div>
           ))}
         </div>
 
-      
-
         {/* Load more */}
         {visibleCount < filtered.length && (
-          <div style={{ textAlign: 'center', marginTop: '44px' }}>
-            <button onClick={() => setVisibleCount(c => c + 20)}
+          <div style={{ textAlign: 'center' }}>
+            <button
+              onClick={() => setVisibleCount(c => c + 20)}
               style={{
-                padding: '13px 44px', borderRadius: '14px',
-                background: isDark ? 'rgba(0,212,255,0.05)' : 'rgba(0,212,255,0.07)',
-                border: '1px solid rgba(0,212,255,0.3)',
-                color: '#00d4ff', cursor: 'pointer',
-                fontFamily: "'Rajdhani', sans-serif",
-                fontWeight: 700, fontSize: '14px', letterSpacing: '1px',
-                transition: 'all 0.22s ease',
-                display: 'inline-flex', alignItems: 'center', gap: '6px',
-                backdropFilter: 'blur(8px)',
+                padding: '14px 48px', borderRadius: '40px',
+                background: 'transparent',
+                border: '2px solid var(--neon-blue)',
+                color: 'var(--neon-blue)', cursor: 'pointer',
+                fontFamily: "'Orbitron', monospace",
+                fontWeight: 700, fontSize: '14px', letterSpacing: '2px',
+                transition: 'all 0.3s ease',
+                display: 'inline-flex', alignItems: 'center', gap: '10px',
               }}
-              onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'rgba(0,212,255,0.12)'; b.style.boxShadow = '0 0 32px rgba(0,212,255,0.28)'; b.style.transform = 'translateY(-3px)'; b.style.borderColor = 'rgba(0,212,255,0.6)'; }}
-              onMouseLeave={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = isDark ? 'rgba(0,212,255,0.05)' : 'rgba(0,212,255,0.07)'; b.style.boxShadow = ''; b.style.transform = ''; b.style.borderColor = 'rgba(0,212,255,0.3)'; }}
+              onMouseEnter={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'var(--neon-blue)'; b.style.color = 'white'; b.style.boxShadow = '0 0 30px rgba(0,212,255,0.4)'; b.style.transform = 'translateY(-3px)'; }}
+              onMouseLeave={e => { const b = e.currentTarget as HTMLButtonElement; b.style.background = 'transparent'; b.style.color = 'var(--neon-blue)'; b.style.boxShadow = ''; b.style.transform = ''; }}
             >
-              Load More Games <MdKeyboardArrowRight size={18} />
+              LOAD MORE GAMES <MdKeyboardArrowRight size={20} />
             </button>
           </div>
         )}
       </div>
 
-      {/* Hot */}
-      <div id="hot" style={{ marginBottom: '52px', padding: '0 18px', animation: 'fadeUp 0.5s ease 0.15s both' }}>
-        <SectionHeader icon={<FaFire size={15} />} title="HOT RIGHT NOW" accent="#ff4757" sub="Trending this week" />
+      {/* Hot Section */}
+      <div id="hot" style={{ marginBottom: '64px', animation: 'fadeUp 0.6s ease 0.1s both' }}>
+        <SectionHeader
+          icon={<FaFire size={18} />}
+          title="TRENDING NOW"
+          accent="#ff4757"
+          sub="Most played this week"
+        />
         <HScrollRow items={hotGames} accent="#ff4757" />
       </div>
 
-      {/* New */}
-      <div id="new" style={{ marginBottom: '52px', padding: '0 18px', animation: 'fadeUp 0.5s ease 0.2s both' }}>
-        <SectionHeader icon={<HiSparkles size={16} />} title="FRESHLY DROPPED" accent="#00ff88" sub="Just added" />
+      {/* New Section */}
+      <div id="new" style={{ marginBottom: '64px', animation: 'fadeUp 0.6s ease 0.2s both' }}>
+        <SectionHeader
+          icon={<HiSparkles size={20} />}
+          title="FRESH DROPS"
+          accent="#00ff88"
+          sub="Newly added games"
+        />
         <HScrollRow items={newGames} accent="#00ff88" />
       </div>
 
-      {/* Top Rated */}
-      <div style={{ marginBottom: '52px', padding: '0 18px', animation: 'fadeUp 0.5s ease 0.25s both' }}>
-        <SectionHeader icon={<FaStar size={14} />} title="TOP RATED" accent="#fbbf24" sub="Highest scored" />
+
+
+      {/* Mid ad */}
+      <div style={{ padding: '0 24px 40px', maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'center' }}>
+        <AdBanner type="rectangle" />
+      </div>
+
+      {/* Divider */}
+      <div style={{
+        height: '1px',
+        background: 'linear-gradient(90deg, transparent, var(--card-border-hover), transparent)',
+        marginBottom: '80px',
+        opacity: 0.3
+      }} />
+      {/* Top Rated Section */}
+      <div style={{ marginBottom: '80px', animation: 'fadeUp 0.6s ease 0.3s both' }}>
+        <SectionHeader
+          icon={<FaStar size={18} />}
+          title="TOP RATED"
+          accent="#fbbf24"
+          sub="Highest scored by community"
+        />
         <HScrollRow items={topRated} accent="#fbbf24" />
       </div>
 
-      {/* Gradient divider */}
-      <div style={{
-        height: '1px', marginBottom: '52px',
-        background: 'linear-gradient(90deg, transparent, rgba(0,212,255,0.45) 30%, rgba(168,85,247,0.45) 70%, transparent)',
-      }} />
-
-         {/* <StatsStrip /> */}
-     
-          
-      {/* Featured */}
-      <div style={{ marginBottom: '52px', animation: 'fadeUp 0.5s ease 0.1s both' }}>
-        <SectionHeader icon={<HiSparkles size={17} />} title="FEATURED" accent="#a855f7" sub="Editor's pick" />
-        <FeaturedCard game={featured} />
-      </div>
-       <div style={{ marginBottom: '52px', animation: 'fadeUp 0.5s ease 0.25s both' }}>
-
-       <CategoryBanners />
-       </div>
-   
-
-      <style>{`
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
+      <style jsx>{`
         @media (max-width: 768px) {
-          .stats-grid  { grid-template-columns: repeat(2,1fr) !important; }
-          .cat-banners { grid-template-columns: repeat(2,1fr) !important; }
           .scroll-arrow { display: none !important; }
         }
       `}</style>

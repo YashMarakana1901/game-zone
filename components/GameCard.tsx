@@ -45,181 +45,128 @@ export default function GameCard({ game, size = 'normal' }: GameCardProps) {
       >
         <Link href={game.url} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
           <div
-            className="game-card"
+            className="premium-card"
             style={{
-              borderRadius: '16px',
-              overflow: 'hidden',
-              border: '1px solid var(--card-border)',
-              cursor: 'pointer',
-              transition: 'transform 0.28s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.28s ease, border-color 0.28s ease',
               position: 'relative',
               height: '100%',
               background: isDark
-                ? `linear-gradient(160deg, hsl(${hue},55%,9%) 0%, hsl(${hue},60%,5%) 100%)`
-                : `linear-gradient(160deg, hsl(${hue},45%,96%) 0%, hsl(${hue},50%,92%) 100%)`,
-            }}
-            onMouseEnter={e => {
-              const el = e.currentTarget;
-              el.style.transform = 'translateY(-8px) scale(1.022)';
-              el.style.boxShadow = `0 24px 50px rgba(0,0,0,0.35), 0 0 0 1px ${accent}55`;
-              el.style.borderColor = `${accent}50`;
-            }}
-            onMouseLeave={e => {
-              const el = e.currentTarget;
-              el.style.transform = '';
-              el.style.boxShadow = '';
-              el.style.borderColor = 'var(--card-border)';
+                ? `linear-gradient(160deg, hsl(${hue},45%,8%) 0%, hsl(${hue},50%,4%) 100%)`
+                : `linear-gradient(160deg, hsl(${hue},40%,98%) 0%, hsl(${hue},45%,94%) 100%)`,
             }}
           >
             {/* Thumbnail */}
             <div style={{
               position: 'relative',
-              height: isLarge ? '210px' : '148px',
+              height: isLarge ? '210px' : '150px',
               background: isDark
-                ? `linear-gradient(145deg, hsl(${hue},62%,12%) 0%, hsl(${hue},70%,7%) 100%)`
-                : `linear-gradient(145deg, hsl(${hue},50%,88%) 0%, hsl(${hue},55%,82%) 100%)`,
+                ? `linear-gradient(145deg, hsl(${hue},55%,12%) 0%, hsl(${hue},65%,7%) 100%)`
+                : `linear-gradient(145deg, hsl(${hue},45%,90%) 0%, hsl(${hue},50%,85%) 100%)`,
               overflow: 'hidden',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}>
-              {/* Grid lines */}
+              {/* Bg patterns */}
               <div style={{
-                position: 'absolute', inset: 0, opacity: isDark ? 0.4 : 0.25,
-                backgroundImage: `linear-gradient(${accent}22 1px, transparent 1px), linear-gradient(90deg, ${accent}22 1px, transparent 1px)`,
-                backgroundSize: '28px 28px',
+                position: 'absolute', inset: 0, opacity: isDark ? 0.35 : 0.15,
+                backgroundImage: `radial-gradient(${accent}1a 1px, transparent 1px)`,
+                backgroundSize: '16px 16px',
               }} />
 
               {/* Glow orb */}
               <div className="card-glow" style={{
-                position: 'absolute', top: '50%', left: '50%',
-                transform: 'translate(-50%,-50%)',
-                width: '100px', height: '100px',
-                background: `radial-gradient(circle, ${glow} 0%, transparent 68%)`,
-                borderRadius: '50%', transition: 'transform 0.3s ease, opacity 0.3s ease',
-              }} />
-
-              {/* Corner accent */}
-              <div style={{
-                position: 'absolute', top: 0, right: 0, width: '70px', height: '70px',
-                background: isDark
-                  ? `conic-gradient(from 225deg at 100% 0%, ${accent}28, transparent 55%)`
-                  : `conic-gradient(from 225deg at 100% 0%, ${accent}20, transparent 55%)`,
+                position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)',
+                width: '120px', height: '120px',
+                background: `radial-gradient(circle, ${accent}33 0%, transparent 70%)`,
+                borderRadius: '50%', opacity: 0, transition: 'all 0.4s ease',
               }} />
 
               {/* Icon */}
               <div className="card-icon" style={{
-                width: '100%', height: '100%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: isDark ? accent : `hsl(${hue},55%,35%)`,
-                filter: `drop-shadow(0 0 14px ${glow})`,
-                fontSize: isLarge ? '56px' : '42px',
-                transition: 'transform 0.3s cubic-bezier(0.34,1.56,0.64,1), filter 0.3s ease',
+                color: isDark ? accent : `hsl(${hue},60%,40%)`,
+                filter: `drop-shadow(0 0 20px ${accent}40)`,
+                fontSize: isLarge ? '64px' : '48px',
+                transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
               }}>{icon}</div>
 
               {/* Play overlay */}
               <div className="play-overlay" style={{
                 position: 'absolute', inset: 0,
-                background: 'rgba(0,0,0,0.56)',
+                background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(3px)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                opacity: 0, transition: 'opacity 0.22s ease',
+                opacity: 0, transition: 'all 0.3s ease',
               }}>
                 <div className="play-btn" style={{
-                  width: '52px', height: '52px',
-                  background: `linear-gradient(135deg, ${accent}, ${accent}99)`,
-                  borderRadius: '50%',
+                  width: '54px', height: '54px',
+                  background: 'white', borderRadius: '50%',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  boxShadow: `0 0 28px ${glow}`,
-                  transform: 'scale(0.8)',
-                  transition: 'transform 0.22s cubic-bezier(0.34,1.56,0.64,1)',
+                  boxShadow: `0 10px 30px rgba(0,0,0,0.3), 0 0 20px ${accent}`,
+                  transform: 'scale(0.8)', transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                  color: '#000',
                 }}>
-                  <IoPlay size={20} color="white" style={{ marginLeft: '3px' }} />
+                  <IoPlay size={24} style={{ marginLeft: '3px' }} />
                 </div>
               </div>
 
               {/* Badges */}
-              <div style={{ position: 'absolute', top: '10px', left: '10px', display: 'flex', gap: '5px' }}>
+              <div style={{ position: 'absolute', top: '12px', left: '12px', display: 'flex', gap: '6px' }}>
                 {game.isHot && (
                   <span style={{
                     background: 'linear-gradient(135deg, #ff6b00, #ff2d78)',
-                    color: 'white', fontSize: '9px', fontWeight: 800,
-                    padding: '3px 8px', borderRadius: '20px',
-                    fontFamily: "'Orbitron', monospace", letterSpacing: '0.8px',
-                    display: 'flex', alignItems: 'center', gap: '3px',
-                    boxShadow: '0 2px 10px rgba(255,45,120,0.45)',
+                    color: 'white', fontSize: '9px', fontWeight: 900,
+                    padding: '4px 10px', borderRadius: '30px',
+                    fontFamily: "'Orbitron', monospace", letterSpacing: '1px',
+                    display: 'flex', alignItems: 'center', gap: '4px',
+                    boxShadow: '0 4px 12px rgba(255,45,120,0.4)',
                   }}><FaFire size={8} /> HOT</span>
                 )}
                 {game.isNew && (
                   <span style={{
                     background: 'linear-gradient(135deg, #00ff88, #00d4ff)',
-                    color: '#060a1a', fontSize: '9px', fontWeight: 800,
-                    padding: '3px 8px', borderRadius: '20px',
-                    fontFamily: "'Orbitron', monospace", letterSpacing: '0.8px',
-                    display: 'flex', alignItems: 'center', gap: '3px',
-                    boxShadow: '0 2px 10px rgba(0,212,255,0.4)',
-                  }}><MdNewReleases size={9} /> NEW</span>
+                    color: '#060a1a', fontSize: '9px', fontWeight: 900,
+                    padding: '4px 10px', borderRadius: '30px',
+                    fontFamily: "'Orbitron', monospace", letterSpacing: '1px',
+                    display: 'flex', alignItems: 'center', gap: '4px',
+                    boxShadow: '0 4px 12px rgba(0,212,255,0.4)',
+                  }}><MdNewReleases size={10} /> NEW</span>
                 )}
               </div>
 
               <FavoriteButton gameId={game.id} />
-
-              {/* Category tag */}
-              <div style={{ position: 'absolute', bottom: '10px', right: '10px' }}>
-                <span style={{
-                  background: isDark ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.75)',
-                  backdropFilter: 'blur(8px)',
-                  color: isDark ? accent : `hsl(${hue},55%,32%)`,
-                  fontSize: '10px', fontWeight: 700,
-                  padding: '3px 9px', borderRadius: '6px',
-                  fontFamily: "'Rajdhani', sans-serif",
-                  border: `1px solid ${accent}30`, letterSpacing: '0.5px',
-                }}>{game.category}</span>
-              </div>
             </div>
 
             {/* Info */}
-            <div style={{ padding: isLarge ? '14px 16px' : '11px 13px' }}>
+            <div style={{ padding: '14px 16px' }}>
+              <div style={{
+                fontFamily: "'Rajdhani', sans-serif", fontSize: '10px', fontWeight: 700,
+                color: accent, textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '4px',
+              }}>{game.category}</div>
               <h3 style={{
                 fontFamily: "'Orbitron', monospace",
-                fontSize: isLarge ? '13px' : '11px', fontWeight: 700,
+                fontSize: isLarge ? '14px' : '12px', fontWeight: 800,
                 color: 'var(--text-primary)',
-                marginBottom: '7px', letterSpacing: '0.3px',
+                marginBottom: '8px', letterSpacing: '0.5px',
                 whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
               }}>{game.title}</h3>
 
-              {isLarge && (
-                <p style={{
-                  color: 'var(--text-secondary)', fontSize: '11px', marginBottom: '10px',
-                  fontFamily: "'Inter', sans-serif", lineHeight: 1.5,
-                  display: '-webkit-box', WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                }}>{game.description}</p>
-              )}
-
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <FaStar size={11} color="#fbbf24" />
-                  <span style={{ color: 'var(--text-primary)', fontSize: '12px', fontWeight: 700 }}>{game.rating}</span>
+                  <FaStar size={12} color="#fbbf24" strokeWidth={2} />
+                  <span style={{ color: 'var(--text-primary)', fontSize: '13px', fontWeight: 700 }}>{game.rating}</span>
                 </div>
-                <span style={{ color: 'var(--text-secondary)', fontSize: '10px', fontFamily: "'Inter', sans-serif" }}>
-                  {game.plays}
-                </span>
+                <div style={{ fontSize: '11px', color: 'var(--text-secondary)', display: 'flex', alignItems: 'center', gap: '3px' }}>
+                  <IoGameController size={12} /> {game.plays}
+                </div>
               </div>
             </div>
           </div>
 
-          <style>{`
-        .game-card:hover .play-overlay { opacity: 1 !important; }
-        .game-card:hover .play-btn     { transform: scale(1) !important; }
-        .game-card:hover .card-icon    { transform: scale(1.1); filter: drop-shadow(0 0 20px currentColor); }
-        .game-card:hover .card-glow    { transform: translate(-50%,-50%) scale(1.5); opacity: 1.4; }
-        .game-card { will-change: transform; }
-      `}</style>
+          <style jsx>{`
+            .premium-card:hover .play-overlay { opacity: 1; }
+            .premium-card:hover .play-btn { transform: scale(1); }
+            .premium-card:hover .card-icon { transform: scale(1.15) rotate(5deg); filter: drop-shadow(0 0 30px ${accent}); }
+            .premium-card:hover .card-glow { opacity: 1; transform: translate(-50%,-50%) scale(1.4); }
+          `}</style>
         </Link>
-        {/* Fullscreen modal — renders into document.body via portal */}
-        {showModal && (
-          <FullscreenGameModal
-            game={game}
-            onClose={() => setShowModal(false)}
-          />
-        )}
+        {showModal && <FullscreenGameModal game={game} onClose={() => setShowModal(false)} />}
       </div>
     </>
   );

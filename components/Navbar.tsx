@@ -89,65 +89,66 @@ export default function Navbar() {
       }}>
 
         {/* Logo */}
-        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px', flexShrink: 0 }}>
+        <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
           <div style={{
-            width: '38px', height: '38px',
-            background: 'linear-gradient(135deg, #00d4ff, #a855f7)',
-            borderRadius: '10px',
+            width: '42px', height: '42px',
+            background: 'var(--accent-gradient)',
+            borderRadius: '12px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: isDark ? '0 0 22px rgba(0,212,255,0.4)' : '0 4px 16px rgba(100,80,255,0.3)',
-            transition: 'transform 0.2s, box-shadow 0.2s',
+            boxShadow: isDark ? '0 0 25px rgba(0,212,255,0.45)' : '0 10px 20px rgba(100,80,255,0.25)',
+            transition: 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
           }}
-            onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.transform = 'rotate(-9deg) scale(1.1)'; d.style.boxShadow = '0 0 32px rgba(0,212,255,0.65)'; }}
-            onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.transform = ''; d.style.boxShadow = isDark ? '0 0 22px rgba(0,212,255,0.4)' : '0 4px 16px rgba(100,80,255,0.3)'; }}
+            onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.transform = 'rotate(-12deg) scale(1.15)'; d.style.boxShadow = '0 0 35px rgba(0,212,255,0.7)'; }}
+            onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; d.style.transform = ''; d.style.boxShadow = isDark ? '0 0 25px rgba(0,212,255,0.45)' : '0 10px 20px rgba(100,80,255,0.25)'; }}
           >
-            <IoGameController size={20} color="white" />
+            <IoGameController size={24} color="white" />
           </div>
           <span style={{
-            fontFamily: "'Orbitron', monospace", fontWeight: 900, fontSize: '18px',
-            background: 'linear-gradient(135deg, #00d4ff, #a855f7)',
+            fontFamily: "'Orbitron', monospace", fontWeight: 900, fontSize: '20px',
+            background: 'var(--accent-gradient)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-            letterSpacing: '2.5px',
-          }}>PokiGame</span>
+            letterSpacing: '3px',
+            filter: isDark ? 'drop-shadow(0 0 10px rgba(0,212,255,0.3))' : 'none',
+          }}>GAMEZONE</span>
         </Link>
 
         {/* Desktop nav links */}
-        <div className="desktop-nav" style={{ display: 'flex', gap: '4px', alignItems: 'center', flexShrink: 0 }}>
+        <div className="desktop-nav" style={{ display: 'flex', gap: '8px', alignItems: 'center', flexShrink: 0 }}>
           {navLinks.map(item => (
             <Link key={item.label} href={item.href} style={{ textDecoration: 'none' }}>
               <div style={{
-                display: 'flex', alignItems: 'center', gap: '6px',
-                padding: '7px 14px', borderRadius: '10px',
-                color: pathname === item.href ? item.accent : 'var(--text-secondary)',
+                display: 'flex', alignItems: 'center', gap: '8px',
+                padding: '8px 16px', borderRadius: '12px',
+                color: pathname === item.href ? 'var(--text-primary)' : 'var(--text-secondary)',
                 fontFamily: "'Rajdhani', sans-serif",
-                fontWeight: 700, fontSize: '13px', letterSpacing: '0.5px', whiteSpace: 'nowrap',
-                transition: 'all 0.2s',
-                background: pathname === item.href ? `${item.accent}16` : 'transparent',
-                border: `1px solid ${pathname === item.href ? `${item.accent}38` : 'transparent'}`,
+                fontWeight: 700, fontSize: '14px', letterSpacing: '0.8px', whiteSpace: 'nowrap',
+                transition: 'all 0.3s ease',
+                background: pathname === item.href ? (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)') : 'transparent',
+                border: `1px solid ${pathname === item.href ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)') : 'transparent'}`,
               }}
-                onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.color = item.accent; d.style.background = `${item.accent}16`; d.style.border = `1px solid ${item.accent}38`; }}
-                onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; const isActive = pathname === item.href; d.style.color = isActive ? item.accent : 'var(--text-secondary)'; d.style.background = isActive ? `${item.accent}16` : 'transparent'; d.style.border = `1px solid ${isActive ? `${item.accent}38` : 'transparent'}`; }}
+                onMouseEnter={e => { const d = e.currentTarget as HTMLDivElement; d.style.color = 'var(--text-primary)'; d.style.background = isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)'; d.style.borderColor = isDark ? 'rgba(255,255,255,0.15)' : 'rgba(0,0,0,0.08)'; }}
+                onMouseLeave={e => { const d = e.currentTarget as HTMLDivElement; const isActive = pathname === item.href; d.style.color = isActive ? 'var(--text-primary)' : 'var(--text-secondary)'; d.style.background = isActive ? (isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.04)') : 'transparent'; d.style.borderColor = isActive ? (isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)') : 'transparent'; }}
               >
-                {item.icon} {item.label}
+                <span style={{ color: item.accent }}>{item.icon}</span> {item.label}
               </div>
             </Link>
           ))}
         </div>
 
         {/* Search */}
-        <div style={{ position: 'relative', flex: 1, maxWidth: '295px' }} ref={wrapRef}>
+        <div style={{ position: 'relative', flex: 1, maxWidth: '320px' }} ref={wrapRef}>
           <form onSubmit={handleSearch}>
             <div style={{
               display: 'flex', alignItems: 'center',
-              background: isDark ? 'rgba(255,255,255,0.055)' : 'rgba(255,255,255,0.65)',
-              border: `1px solid ${showSuggestions ? 'rgba(0,212,255,0.45)' : (isDark ? 'rgba(255,255,255,0.09)' : 'rgba(100,80,220,0.14)')}`,
-              borderRadius: showSuggestions && suggestions.length > 0 ? '12px 12px 0 0' : '12px',
-              padding: '8px 14px', gap: '8px',
-              transition: 'all 0.2s',
-              boxShadow: showSuggestions ? `0 0 0 3px rgba(0,212,255,0.1)` : 'none',
-              backdropFilter: 'blur(8px)',
+              background: isDark ? 'rgba(255,255,255,0.04)' : 'rgba(0,0,0,0.03)',
+              border: `1px solid ${showSuggestions ? 'var(--neon-blue)' : (isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)')}`,
+              borderRadius: showSuggestions && suggestions.length > 0 ? '16px 16px 0 0' : '16px',
+              padding: '10px 16px', gap: '10px',
+              transition: 'all 0.3s ease',
+              boxShadow: showSuggestions ? `0 0 20px rgba(0,212,255,0.15)` : 'none',
+              backdropFilter: 'blur(10px)',
             }}>
-              <IoSearch size={14} color="var(--text-secondary)" style={{ flexShrink: 0 }} />
+              <IoSearch size={16} color="var(--text-secondary)" style={{ flexShrink: 0 }} />
               <input
                 ref={inputRef} type="text" placeholder="Search games..."
                 value={query}
@@ -156,17 +157,18 @@ export default function Navbar() {
                 style={{
                   background: 'none', border: 'none', outline: 'none',
                   color: 'var(--text-primary)', fontFamily: "'Rajdhani', sans-serif",
-                  fontSize: '14px', width: '100%', fontWeight: 600,
+                  fontSize: '15px', width: '100%', fontWeight: 600,
                 }}
               />
               {query && (
                 <button type="button" onClick={() => { setQuery(''); setShowSuggestions(false); }}
                   style={{ background: 'none', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
-                  <IoClose size={15} />
+                  <IoClose size={18} />
                 </button>
               )}
             </div>
           </form>
+
 
           {showSuggestions && suggestions.length > 0 && (
             <div style={{
